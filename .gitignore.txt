@@ -1,0 +1,6 @@
+.git/
+.venv/
+dataset/
+random_melodies/
+results/
+notes/
