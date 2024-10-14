@@ -4,6 +4,11 @@ import joblib
 import tensorflow as tf
 import os
 import re
+import sys
+import json
+
+sys.stdout.reconfigure(encoding='utf-8')
+
 
 def extract_features(file_path, n_mfcc=13, sr=22050, max_duration=5.0):
     """
@@ -52,6 +57,9 @@ output_dir = 'results/'  # Dossier pour enregistrer les notes prédites
 # Nom du fichier de sortie
 output_file_path = os.path.join(output_dir, 'predicted_notes.txt')
 
+predictions = [
+    
+]
 
 def extract_number(filename):
     """
@@ -66,7 +74,8 @@ files = [f for f in os.listdir(input_dir) if f.endswith('.wav')]
 sorted_files = sorted(files, key=extract_number)
 
 # Ouvrir le fichier de sortie en écriture
-with open(output_file_path, 'w') as output_file:
+with open(output_file_path, 'w', encoding='utf-8') as output_file:
+
     # Boucle pour traiter chaque fichier audio dans le dossier
     for filename in sorted_files:
         if filename.endswith('.wav'):  # Vérifiez que le fichier est un WAV
@@ -91,11 +100,18 @@ with open(output_file_path, 'w') as output_file:
                 predicted_note = label_encoder.inverse_transform([predicted_label_index])[0]
 
                 # Écrire la note prédite dans le fichier de sortie
-                output_file.write(f"{filename} : {predicted_note} - {duration}\n")
+
+                output_file.write(f"{predicted_note}:{duration},\n")
+                predictions.append({
+                    "note": predicted_note,
+                    "duration": duration
+                })
                 print(f"Fichier: {filename}, La note prédite est : {predicted_note}")
             else:
                 print(f"Impossible d'extraire les caractéristiques pour {filename}.")
 
+
 print(f"Toutes les notes prédites ont été enregistrées dans {output_file_path}.")
+
 
 

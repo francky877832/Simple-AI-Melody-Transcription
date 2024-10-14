@@ -2,3 +2,8 @@
 .git/
 .venv/
 dataset/
+backend/node_modules/
+backend/medias
+backend/notes
+backend/samples_notes
+samples_notes/

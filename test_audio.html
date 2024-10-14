@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'Upload Audio</title>
+    <!-- Lien vers Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Envoyer un fichier audio</h1>
+        <form id="audioForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="audioFile">Choisissez un fichier audio :</label>
+                <input type="file" class="form-control-file" id="audioFile" name="audioFile" accept="audio/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+			
+			
+        </form>
+		
+		
+		 <div class="text-center">
+        <button 
+            id="downloadButton" 
+            class="btn btn-success" 
+            style="display: none;"
+        >
+            Télécharger la mélodie
+        </button>
+    </div>
+
+        <div id="response" class="mt-3"></div>
+    </div>
+
+<!--
+    <script>
+        document.getElementById('audioForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            const formData = new FormData();
+            const audioFile = document.getElementById('audioFile').files[0];
+            formData.append('file', audioFile);
+
+            try {
+                const response = await fetch('http://localhost:8001/transcribe', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                document.getElementById('response').innerHTML = `<div class="alert alert-success">${result.message}</div>`;
+				
+				
+				
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi du fichier :', error);
+                document.getElementById('response').innerHTML = `<div class="alert alert-danger">Erreur lors de l'envoi du fichier.</div>`;
+            }
+        });
+    </script>
+-->	
+	
+	
+	 <script>
+        document.getElementById('audioForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            const formData = new FormData();
+            const audioFile = document.getElementById('audioFile').files[0];
+            formData.append('file', audioFile);
+
+
+            fetch('http://localhost:8001/transcribe', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la transcription');
+                }
+                return response.blob(); // Pour récupérer le fichier en tant que blob
+            })
+            .then(blob => {
+                // Créer un lien pour le téléchargement
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'predicted_notes.json'; // Nom du fichier téléchargé
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url); // Libère la mémoire
+                document.body.removeChild(a);
+				
+				
+				document.getElementById('downloadButton').style.display = 'inline-block';
+				document.getElementById('response').innerHTML = `<div class="alert alert-success">Success</div>`;
+
+            }
+			)
+            .catch(error => {
+               console.error('Erreur lors de l\'envoi du fichier :', error);
+                document.getElementById('response').innerHTML = `<div class="alert alert-danger">Erreur lors de l'envoi du fichier.</div>`;
+            });
+        });
+		
+		
+		document.getElementById('downloadButton').addEventListener('click', () => {
+        window.location.href = 'http://localhost:8001/download'; // Télécharge le fichier depuis /download
+    });
+    </script>
+
+    <!-- Lien vers Bootstrap JS (optionnel) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

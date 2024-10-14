@@ -1,16 +1,19 @@
 from pydub import AudioSegment
 from pydub.playback import play
 import numpy as np
+import os
 
 # Define the sample rate
 sample_rate = 44100
-
+current_dir = os.path.dirname(os.path.abspath(__file__))  
+print(current_dir)
 # Load guitar samples
-E2 = AudioSegment.from_file("dataset/archive/Guitar Dataset/E2/E2-1-spn.wav")
-DSHARP3 = AudioSegment.from_file("dataset/archive/Guitar Dataset/Dsharp3/Dsharp3-1-spn.wav")
-E5 = AudioSegment.from_file("dataset/archive/Guitar Dataset/E5/E5-1-spn.wav")
-F3 = AudioSegment.from_file("dataset/archive/Guitar Dataset/F3/F3-1-spn.wav")
-FSHARP3 = AudioSegment.from_file("dataset/archive/Guitar Dataset/Fsharp3/Fsharp3-1-spn.wav")
+E2 = AudioSegment.from_file("dataset/archive/Guitar Dataset/E2/E2-2-spm.wav")
+DSHARP3 = AudioSegment.from_file("dataset/archive/Guitar Dataset/Dsharp3/Dsharp3-2-spm.wav")
+E5 = AudioSegment.from_file("dataset/archive/Guitar Dataset/E5/E5-2-spm.wav")
+F3 = AudioSegment.from_file("dataset/archive/Guitar Dataset/F3/F3-2-spm.wav")
+FSHARP3 = AudioSegment.from_file("dataset/archive/Guitar Dataset/Fsharp3/Fsharp3-2-spm.wav")
+
 
 # Define the melody with notes and durations
 melody = [
