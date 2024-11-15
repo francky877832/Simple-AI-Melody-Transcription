@@ -124,16 +124,16 @@ Contributions are welcome! If you find a bug or want to add new features, feel f
 
 ```
 
-### Key Sections:
-1. **Project Overview**: Describes the purpose and features of the project.
-2. **Installation Instructions**: Guides users on how to set up the project on their local machine.
-3. **Usage**: Explains how to run the different parts of the project, including data scraping, segmentation, and visualization.
-4. **Dependencies**: Lists the required Python packages.![graphs](https://github.com/user-attachments/assets/bc528f07-2405-4e85-8646-56393d2656ca)
+Key Sections:
+1. Project Overview: Describes the purpose and features of the project.
+2. Installation Instructions: Guides users on how to set up the project on their local machine.
+3. Usage: Explains how to run the different parts of the project, including data scraping, segmentation, and visualization.
+4. Dependencies: Lists the required Python packages.![graphs](https://github.com/user-attachments/assets/bc528f07-2405-4e85-8646-56393d2656ca)
 
-5. **Data Preprocessing**: Details the steps for cleaning and preparing the dataset.
-6. **Data Analysis & Visualization**: Provides information on how the data is analyzed and visualized.
-7. **Contributing**: Explains how to contribute to the project.
-8. **License**: Includes the licensing information.
+5. Data Preprocessing: Details the steps for cleaning and preparing the dataset.
+6. Data Analysis & Visualization: Provides information on how the data is analyzed and visualized.
+7. Contributing: Explains how to contribute to the project.
+8. License: Includes the licensing information.
 ![graphs](https://github.com/user-attachments/assets/5f0ddeea-de6b-4305-9564-b6f312a5c2de)
 
 
